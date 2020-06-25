@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+  pre_build:
+    commands:
+       - pip3 install awscli --upgrade --user
+  build:
+    commands:
+       - echo 1
+       - pathval=`pwd`
+       - pwd > test.txt
+       - echo 1
+       - ls -ltr >> test.txt
+       - mkdir sql
+       - chmod 777 sql
+       - mv *.sql sql/.
+       - ls -ltr >> test.txt
+artifacts:
+  files:
+    - 'sql/*'
+    - 'appspec.yml'
+  discard-paths: no
+  name: ziptxt
+  
